@@ -6,12 +6,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.hazzatur.dogedex.api.ApiResponseStatus
 import com.hazzatur.dogedex.databinding.ActivityDogListBinding
 import com.hazzatur.dogedex.dogdetail.DogDetailActivity
 import com.hazzatur.dogedex.dogdetail.DogDetailActivity.Companion.DOG_KEY
 
+private const val GRID_SPAN_COUNT = 3
 class DogListActivity : AppCompatActivity() {
 
     private val dogListViewModel: DogListViewModel by viewModels()
@@ -22,7 +23,7 @@ class DogListActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val recycler = binding.dogRecycler
-        recycler.layoutManager = LinearLayoutManager(this)
+        recycler.layoutManager = GridLayoutManager(this, GRID_SPAN_COUNT)
 
         val loadingWheel = binding.loadingWheel
 
