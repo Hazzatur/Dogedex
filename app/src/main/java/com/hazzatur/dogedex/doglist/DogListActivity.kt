@@ -7,7 +7,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.hazzatur.dogedex.R
 import com.hazzatur.dogedex.api.ApiResponseStatus
 import com.hazzatur.dogedex.databinding.ActivityDogListBinding
 import com.hazzatur.dogedex.dogdetail.DogDetailActivity
@@ -42,24 +41,12 @@ class DogListActivity : AppCompatActivity() {
 
         dogListViewModel.status.observe(this) { status ->
             when (status) {
-                ApiResponseStatus.LOADING -> {
-                    loadingWheel.visibility = View.VISIBLE
-                }
-                ApiResponseStatus.SUCCESS -> {
-                    loadingWheel.visibility = View.GONE
-                }
-                ApiResponseStatus.ERROR -> {
+                is ApiResponseStatus.Loading -> loadingWheel.visibility = View.VISIBLE
+                is ApiResponseStatus.Success -> loadingWheel.visibility = View.GONE
+                is ApiResponseStatus.Error -> {
                     Toast.makeText(
                         this,
-                        R.string.error_downloading_dogs,
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    loadingWheel.visibility = View.GONE
-                }
-                else -> {
-                    Toast.makeText(
-                        this,
-                        R.string.error_unknown_status,
+                        status.messageId,
                         Toast.LENGTH_SHORT
                     ).show()
                     loadingWheel.visibility = View.GONE

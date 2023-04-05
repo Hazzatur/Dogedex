@@ -3,7 +3,6 @@ package com.hazzatur.dogedex.api.dto
 import com.hazzatur.dogedex.Dog
 
 class DogDTOMapper {
-
     private fun fromDogDTOToDogDomain(dogDTO: DogDTO): Dog {
         return Dog(
             dogDTO.id,
