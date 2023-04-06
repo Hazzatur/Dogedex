@@ -52,6 +52,7 @@ class DogListActivity : AppCompatActivity() {
                     ).show()
                     loadingWheel.visibility = View.GONE
                 }
+                else -> {}
             }
         }
     }
